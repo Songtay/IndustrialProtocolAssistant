@@ -1,0 +1,17 @@
+[
+  {
+    "name": "读温度 (AA 55 01)",
+    "request": "AA 55 01 {crc16}",
+    "reply": "AA 55 01 {temp:Float} {crc16}"
+  },
+  {
+    "name": "读计数 (AA 55 02)",
+    "request": "AA 55 02 {xor}",
+    "reply": "AA 55 02 {count:UInt16} {xor}"
+  },
+  {
+    "name": "读运行状态 (AA 55 03)",
+    "request": "AA 55 03",
+    "reply": "AA 55 03 {running:Bool}"
+  }
+]

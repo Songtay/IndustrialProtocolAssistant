@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SocketSimulator</RootNamespace>
+    <AssemblyName>SocketSimulator</AssemblyName>
+    <Description>Socket 服务端模拟器：监听 TCP 端口，按 RTU 风格或自定义规则应答主站请求，供工业协议调试助手的 Socket 自由协议主站驱动联调演示。</Description>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ModbusRtuSlave</RootNamespace>
+    <AssemblyName>ModbusRtuSlave</AssemblyName>
+    <Description>Modbus RTU 串口从站模拟器：监听一个串口并按标准 Modbus RTU 协议应答主站请求（01/02/03/04/05/06/0F/10 等功能码），供工业协议调试助手的 Modbus RTU 主站驱动无设备联调演示。</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NModbus" Version="3.0.81" />
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Drivers\IndustrialProtocolAssistant.Drivers.csproj" />
+  </ItemGroup>
+</Project>

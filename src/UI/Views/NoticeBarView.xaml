@@ -1,0 +1,31 @@
+<UserControl x:Class="IndustrialProtocolAssistant.UI.Views.NoticeBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 运行提示（底部单行消息条）：只保留最近一条重要操作反馈，新提示整体覆盖旧提示，不堆积不滚动；
+         与顶部连接状态指示灯完全分离，详细过程请以右侧系统日志为准 -->
+    <GroupBox Header="运行提示" Padding="4">
+        <TextBlock Text="{Binding CurrentNotice.Message, TargetNullValue='暂无重要操作提示…'}"
+                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                   ToolTip="{Binding CurrentNotice.Message}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#BDBDBD"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentNotice.Level}" Value="Info">
+                            <Setter Property="Foreground" Value="#616161"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CurrentNotice.Level}" Value="Success">
+                            <Setter Property="Foreground" Value="#2E7D32"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CurrentNotice.Level}" Value="Warning">
+                            <Setter Property="Foreground" Value="#EF6C00"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CurrentNotice.Level}" Value="Error">
+                            <Setter Property="Foreground" Value="#D32F2F"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </GroupBox>
+</UserControl>

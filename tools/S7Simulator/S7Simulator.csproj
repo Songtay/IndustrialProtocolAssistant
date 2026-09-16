@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>S7Simulator</RootNamespace>
+    <AssemblyName>S7Simulator</AssemblyName>
+    <Description>S7 服务端模拟器：基于 Snap7 Server 模拟西门子 S7-300/400 PLC，供工业协议调试助手的 S7 驱动在无真实 PLC 时联调演示。</Description>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Snap7：S7comm 服务端（模拟 PLC） -->
+    <!-- S7netplus：仅用于 selftest 自测（与上位机 S7 驱动同库） -->
+    <PackageReference Include="S7netplus" Version="0.14.0" />
+    <PackageReference Include="Snap7Server.Net" Version="1.0.1" />
+  </ItemGroup>
+</Project>

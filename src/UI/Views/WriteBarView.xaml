@@ -1,0 +1,18 @@
+<UserControl x:Class="IndustrialProtocolAssistant.UI.Views.WriteBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 下发写入 -->
+    <GroupBox Header="下发写入 (Write)" Padding="8">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="目标 Tag:" VerticalAlignment="Center"/>
+            <ComboBox Width="200" Margin="4,0" ItemsSource="{Binding Tags}"
+                      SelectedItem="{Binding WriteTargetTag}" DisplayMemberPath="DisplayName"/>
+            <TextBlock Text="写入值:" VerticalAlignment="Center" Margin="16,0,0,0"/>
+            <TextBox Width="120" Margin="4,0" Text="{Binding WriteValue, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="Bool: true/false；UInt16: 0~65535；Int16: -32768~32767；Float/Int32: 数值"/>
+            <Button Content="写入" Margin="8,0,0,0" Width="80" Command="{Binding WriteCommand}"/>
+            <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Foreground="Gray"
+                       Text="{Binding WriteTargetHint, Mode=OneWay}"/>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

@@ -1,0 +1,70 @@
+<Window x:Class="IndustrialProtocolAssistant.UI.OpcUaNodeBrowserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:IndustrialProtocolAssistant.UI"
+        Title="OPC UA 节点浏览器" Height="620" Width="720"
+        MinHeight="420" MinWidth="540" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:OpcUaNodeItem}" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Detail}" VerticalAlignment="Center" Margin="8,0,0,0"
+                           Foreground="#888888" FontSize="11"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部：连接状态 + 操作 -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,6">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="RefreshButton" Content="刷新" Width="64" Margin="4,0" Click="RefreshButton_Click"/>
+                <Button x:Name="ReconnectButton" Content="重新连接" Width="76" Margin="4,0" Click="ReconnectButton_Click"/>
+            </StackPanel>
+            <TextBlock x:Name="StatusText" VerticalAlignment="Center" Foreground="#666666" TextWrapping="Wrap"/>
+        </DockPanel>
+
+        <!-- NodeId 快速检查 -->
+        <DockPanel Grid.Row="1" Margin="0,0,0,6">
+            <TextBlock DockPanel.Dock="Left" Text="NodeId:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <Button DockPanel.Dock="Right" Content="检查" Width="60" Margin="4,0" Click="InspectButton_Click"/>
+            <TextBox x:Name="InspectBox" VerticalContentAlignment="Center"
+                     ToolTip="输入 NodeId 直接检查节点（如 ns=2;s=温度），无需展开整棵树"/>
+        </DockPanel>
+
+        <TreeView x:Name="NodeTree" Grid.Row="2" BorderBrush="#D0D0D0" BorderThickness="1"
+                  SelectedItemChanged="NodeTree_SelectedItemChanged"
+                  MouseDoubleClick="NodeTree_MouseDoubleClick"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"/>
+
+        <!-- 选中节点详情 -->
+        <Border Grid.Row="3" Background="#F7F7F7" BorderBrush="#DDDDDD" BorderThickness="1"
+                Padding="8" Margin="0,6,0,6">
+            <StackPanel>
+                <TextBlock x:Name="DetailName" FontWeight="Bold" FontSize="13" Text="未选择节点"/>
+                <TextBlock x:Name="DetailMeta" Margin="0,2,0,0" Foreground="#555555" FontSize="12" TextWrapping="Wrap"/>
+                <TextBlock x:Name="DetailValue" Margin="0,4,0,0" Foreground="#333333" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 底部操作 -->
+        <DockPanel Grid.Row="4">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="UseButton" Content="使用此节点 →" Width="112" Margin="4,0" Padding="8,4"
+                        IsEnabled="False" Click="UseButton_Click"
+                        ToolTip="把选中节点的 NodeId 填入 Tag 地址（双击节点也可）"/>
+                <Button Content="关闭" Width="70" Margin="4,0" Padding="8,4" Click="CloseButton_Click"/>
+            </StackPanel>
+            <TextBlock VerticalAlignment="Center" Foreground="#999999" FontSize="11"
+                       Text="提示：展开节点浏览地址空间，选中节点后点击“使用此节点”"/>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,46 @@
+<UserControl x:Class="IndustrialProtocolAssistant.UI.Views.LogTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+            <Button Content="清空" Width="70" Command="{Binding ClearLogsCommand}"/>
+            <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Foreground="Gray"
+                       Text="Serilog 实时日志（最新在上，最多保留 1000 条）"/>
+        </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Logs}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="{Binding Timestamp}" Foreground="Gray" FontFamily="Consolas" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding LevelShort}" Width="38" FontFamily="Consolas" VerticalAlignment="Center" Margin="6,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#616161"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Level}" Value="Information">
+                                            <Setter Property="Foreground" Value="#1976D2"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Warning">
+                                            <Setter Property="Foreground" Value="#FB8C00"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Level}" Value="Error">
+                                            <Setter Property="Foreground" Value="#E53935"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Message}" FontFamily="Consolas" Margin="6,0,0,0"
+                                   TextWrapping="Wrap" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

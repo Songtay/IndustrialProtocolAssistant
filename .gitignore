@@ -1,0 +1,173 @@
+# ==========================================================================
+#  Industrial Protocol Assistant (.NET 8 / WPF) — Git 忽略规则
+#  说明：本文件只影响「尚未被 Git 跟踪」的文件；如需让规则生效，请确保
+#        这些文件从未被 `git add` 过（发布到 GitHub 前首次提交即可）。
+# ==========================================================================
+
+# --------------------------------------------------------------------------
+# 1. .NET 构建产物（编译输出，绝不上传）
+# --------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Bb]uildLog.txt
+*.dll.config
+*.exe.config
+*.pdb
+*.mdb
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tlh
+*.tli
+*.tmp
+*.tmp_proj
+*_i.c
+*_p.c
+*_h.h
+*.h.orig
+*.c.orig
+*.cpp.orig
+*.[Cc]ache
+!packages/
+# 中间语言 / 增量编译中间文件
+*.cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# --------------------------------------------------------------------------
+# 2. Visual Studio / Rider / VS Code 本地设置（个人环境，不上传）
+# --------------------------------------------------------------------------
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.rsuser
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+*.slnLaunch.user
+.vscode/
+.idea/
+*.iml
+*.tmp.lock
+
+# --------------------------------------------------------------------------
+# 3. NuGet / 包还原缓存
+# --------------------------------------------------------------------------
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+.nuget/
+*.nupkg.metadata
+*.nuget.g.props
+*.nuget.g.targets
+*.nuget.props
+*.nuget.targets
+
+# --------------------------------------------------------------------------
+# 4. 测试与覆盖率报告
+# --------------------------------------------------------------------------
+[Tt]est[Rr]esult*/
+[Bb]enchmarkDotNet.Artifacts/
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+*.trx
+
+# --------------------------------------------------------------------------
+# 5. 本项目运行期数据（数据库 / 日志，含本地调试数据，不上传）
+# --------------------------------------------------------------------------
+# SQLite 时序库与配置库
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+# Serilog 滚动日志
+*.log
+logs/
+
+# --------------------------------------------------------------------------
+# 6. AI 编码助手 / 智能 IDE 产物（工作区会话、缓存、规则快照，不上传）
+# --------------------------------------------------------------------------
+# 通用 AI 助手工作区数据目录
+.codebuddy/
+.cursor/
+.claude/
+.claude-code/
+.continue/
+.windsurf/
+.specstory/
+.cline/
+.roo/
+.augment/
+.aider*
+# AI 助手生成的临时/会话文件
+*.aider.chat.history.md
+*.aider.input.history
+.cursorrules
+.cursorignore
+.mcp.json
+
+# --------------------------------------------------------------------------
+# 7. 操作系统与编辑器临时文件
+# --------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+
+# --------------------------------------------------------------------------
+# 8. 合并冲突 / 备份残留
+# --------------------------------------------------------------------------
+*.orig
+*.rej
+*.bak
+*.backup
+*.[Cc]opy
+
+# --------------------------------------------------------------------------
+# 9. 需要保留在仓库中的文件（防止被上面的规则误伤）
+# --------------------------------------------------------------------------
+!.gitignore
+!.gitattributes
+!.editorconfig
+!*.editorconfig
+!docs/**
+!README.md

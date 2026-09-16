@@ -1,0 +1,107 @@
+<UserControl x:Class="IndustrialProtocolAssistant.UI.Views.ManualRawTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- 协议说明 -->
+            <RowDefinition Height="Auto"/>   <!-- 请求输入 -->
+            <RowDefinition Height="Auto"/>   <!-- 应答 Hex -->
+            <RowDefinition Height="Auto"/>   <!-- 应答 ASCII -->
+            <RowDefinition Height="Auto"/>   <!-- 状态行 -->
+            <RowDefinition Height="*"/>      <!-- 会话记录 -->
+        </Grid.RowDefinitions>
+
+        <!-- 协议 / 自动补全说明 -->
+        <Grid Grid.Row="0" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="驱动协议：" VerticalAlignment="Center" Foreground="#666"/>
+                <TextBlock x:Name="DriverLabel" VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text="　" VerticalAlignment="Center"/>
+                <CheckBox x:Name="AutoFrameCheck" VerticalAlignment="Center" IsChecked="True"/>
+            </StackPanel>
+            <TextBlock x:Name="HintText" Grid.Column="1" Margin="12,0,0,0"
+                       Foreground="#888" FontSize="11" TextWrapping="Wrap"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- 请求输入行 -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="请求帧 (Hex):" VerticalAlignment="Center"/>
+            <TextBox x:Name="RequestHex" Grid.Column="1" Margin="6,0" Padding="4,2"
+                     Height="30" VerticalContentAlignment="Center"
+                     FontFamily="Consolas" FontSize="13"
+                     Text="01 03 00 00 00 01"
+                     KeyDown="RequestHex_KeyDown"/>
+            <Button Grid.Column="2" x:Name="SendButton" Content="发送" Width="90" Height="30"
+                    Margin="0,0,6,0" Click="SendButton_Click"/>
+            <Button Grid.Column="3" Content="清空" Width="70" Height="30" Click="ClearRequest_Click"/>
+        </Grid>
+
+        <!-- 应答区（Hex 与 ASCII 并排两行，类似串口助手的收发框） -->
+        <Grid Grid.Row="2" Margin="0,0,0,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="应答 (Hex):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox x:Name="RxHexBox" Grid.Column="1" IsReadOnly="True" Padding="4,2"
+                     Height="64" TextWrapping="Wrap" AcceptsReturn="False"
+                     VerticalScrollBarVisibility="Auto"
+                     FontFamily="Consolas" FontSize="13"
+                     Background="#F7F7F7"/>
+        </Grid>
+        <Grid Grid.Row="3" Margin="0,0,0,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="应答 (ASCII):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox x:Name="RxAsciiBox" Grid.Column="1" IsReadOnly="True" Padding="4,2"
+                     Height="30" VerticalContentAlignment="Center"
+                     FontFamily="Consolas" FontSize="13"
+                     Background="#F7F7F7"/>
+        </Grid>
+
+        <!-- 状态行 -->
+        <Border Grid.Row="4" Margin="0,2,0,8" Padding="6,3" Background="#EEF3F9" CornerRadius="3">
+            <TextBlock x:Name="ResultStatusText" Foreground="#333"
+                       FontSize="12" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- 会话记录 -->
+        <Grid Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,4">
+                <TextBlock Text="会话记录（最新在上）" Foreground="#666" FontSize="12"
+                           VerticalAlignment="Center"/>
+                <Button Content="清空" Width="64" Height="24" Margin="10,0,0,0"
+                        Padding="0" Click="ClearLog_Click"/>
+            </StackPanel>
+            <ListBox x:Name="SessionLog" Grid.Row="1"
+                     BorderBrush="#DDD"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontFamily="Consolas" FontSize="12"
+                                   TextWrapping="NoWrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>
