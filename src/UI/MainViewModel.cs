@@ -72,6 +72,16 @@ public partial class MainViewModel : ObservableObject, IDisposable
     /// <summary>当前设备 Id（手动收发面板直连同一台设备 IO 闸门）。</summary>
     internal string DeviceId => _deviceId;
 
+    /// <summary>底部作者信息栏显示的版本号（取自程序集版本，兜底 1.0.0）。</summary>
+    public string VersionText
+    {
+        get
+        {
+            var version = typeof(MainViewModel).Assembly.GetName().Version;
+            return version is null ? "1.0.0" : $"{version.Major}.{version.Minor}.{version.Build}";
+        }
+    }
+
     /// <summary>顶部"日志"选项卡数据源（Serilog 内存接收器实时收集，最新在上）。</summary>
     public ObservableCollection<LogEntry> Logs => LogViewerSink.Instance.Entries;
     private readonly object _chartLock = new();

@@ -13,6 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- 连接配置 + 运行状态（协议参数由驱动自描述，动态表单随驱动切换） -->
@@ -47,5 +48,25 @@
         <!-- 运行提示（底部单行消息条）：只保留最近一条重要操作反馈，新提示整体覆盖旧提示，不堆积不滚动；
              与顶部连接状态指示灯完全分离，详细过程请以右侧系统日志为准 -->
         <views:NoticeBarView Grid.Row="3" Margin="0,8,0,0"/>
+
+        <!-- 作者信息栏：开源项目署名，点击链接打开作者 GitHub 主页 -->
+        <Border Grid.Row="4" Margin="0,8,0,0" Padding="10,4" Background="#F5F5F5"
+                BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="3">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="工业协议调试助手 · 轻量 HMI" Foreground="#9E9E9E" VerticalAlignment="Center"/>
+                <Rectangle Width="1" Height="13" Margin="10,0" Fill="#DDDDDD" VerticalAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center" Foreground="#757575">
+                    <Run Text="作者：Songtay"/>
+                    <Run Text="  ·  "/>
+                    <Hyperlink NavigateUri="https://github.com/Songtay"
+                               ToolTip="在浏览器中打开作者 GitHub 主页"
+                               RequestNavigate="AuthorLink_RequestNavigate">
+                        <Run Text="https://github.com/Songtay"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock Text="{Binding VersionText, StringFormat='v{0}'}" Foreground="#9E9E9E"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" Margin="16,0,0,0"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
